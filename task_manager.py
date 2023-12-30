@@ -134,12 +134,14 @@ def view_all():
     and labelling) '''
 
     for t in task_list:
-        disp_str = f"Task: \t\t {t['title']}\n"
+        disp_str = "-" * 75 + "\n"
+        disp_str += f"Task: \t\t {t['title']}\n"
         disp_str += f"Assigned to: \t {t['username']}\n"
         disp_str += f"Date Assigned: \t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
         disp_str += f"Due Date: \t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-        disp_str += f"Task Description: \n {t['description']}\n"
+        disp_str += f"\nTask Description: \n{t['description']}"
         print(disp_str)
+    print("-" * 75)
 
 
 def view_mine():
@@ -149,12 +151,14 @@ def view_mine():
 
     for t in task_list:
         if t['username'] == curr_user:
-            disp_str = f"Task: \t\t {t['title']}\n"
+            disp_str = "-" * 75 + "\n"
+            disp_str += f"Task: \t\t {t['title']}\n"
             disp_str += f"Assigned to: \t {t['username']}\n"
             disp_str += f"Date Assigned: \t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
             disp_str += f"Due Date: \t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-            disp_str += f"Task Description: \n {t['description']}\n"
+            disp_str += f"\nTask Description: \n{t['description']}"
             print(disp_str)
+    print("-" * 75)
 
 
 #====Login Section====
