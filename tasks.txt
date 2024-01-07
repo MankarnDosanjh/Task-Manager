@@ -1,4 +1,4 @@
-grafted;Add functionality to task manager;Add additional options and refactor the code.;2024-02-01;2022-11-22;No
-admin;Improve readability of view_mine output;Identify tasks with a number and allow a user to select tasks and mark them as complete or edit the task title;2023-10-23;2023-12-30;No
-grafted;Put these foolish ambitions to rest;Unworthy tarnished;2023-12-31;2023-12-31;No
-admin;Make sure indices can reach lines in non-consecutive sequence;If you get a good index this is done;2024-02-01;2023-12-31;No
+grafted;Add functionality to task manager;Add additional options and refactor the code.;2024-02-01;2022-11-22;Yes
+grafted;Improve readability of view_mine output;Identify tasks with a number and allow a user to select tasks and mark them as complete or edit the task title;2024-01-12;2023-12-30;No
+grafted;Put these foolish ambitions to rest;Unworthy tarnished;2023-12-31;2023-12-31;Yes
+grafted;Make sure indices can reach lines in non-consecutive sequence;If you get a good index this is done;2024-02-01;2023-12-31;No

@@ -9,6 +9,8 @@
 #=====importing libraries===========
 import os
 from datetime import datetime, date
+import random
+import time
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
@@ -141,9 +143,15 @@ def view_all():
     format of Output 2 presented in the task pdf (i.e. includes spacing
     and labelling) '''
 
+    # Fake loading bar for continuity with view_mine function
+    for s in range(50):
+        print(".", end = "")
+        time.sleep(random.random() / 10)
+    print("\n\n\n\n")
+
     for t in task_list:
         disp_str = "-" * 75 + "\n"
-        disp_str += f"Task: \t {t['title']}\n"
+        disp_str += f"Task: \t\t {t['title']}\n"
         disp_str += f"\nAssigned to: \t {t['username']}\n"
         disp_str += f"Date Assigned: \t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
         disp_str += f"Due Date: \t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
@@ -165,50 +173,60 @@ def view_mine():
     format of Output 2 presented in the task pdf (i.e. includes spacing
     and labelling)'''
 
-    # Variables to track task lines and display to user
-    i = 0
-    display_count = 1
-    indices = []
-
-    # Displays task details to user and appends indices of tasks into list
-    for t in task_list:
-        if t['username'] == curr_user:
-            disp_str = "-" * 75 + "\n"
-            disp_str += f"Task {display_count}: \t {t['title']}\n"
-            disp_str += f"\nAssigned to: \t {t['username']}\n"
-            disp_str += f"Date Assigned: \t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-            disp_str += f"Due Date: \t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-            disp_str += f"Completed: \t {t['completed']}\n"
-            disp_str += f"\nTask Description: \n{t['description']}"
-            disp_str += f""
-            print(disp_str)
-            indices.append(i)
-            display_count += 1
-        i += 1
-    print("-" * 75)
-
-    # Prompts user for task selection based on output
     while True:
+        # Variables to track task lines and display to user
+        i = 0
+        display_count = 1
+        indices = []
+
+        # Fake loading bar to help user distinguish newest task list output
+        for s in range(50):
+            print(".", end = "")
+            time.sleep(random.random() / 10)
+        print("\n\n\n\n")
+
+        # Displays task details to user and appends indices of tasks into list
+        for t in task_list:
+            if t['username'] == curr_user:
+                disp_str = "-" * 75 + "\n"
+                disp_str += f"Task {display_count}: \t {t['title']}\n"
+                disp_str += f"\nAssigned to: \t {t['username']}\n"
+                disp_str += f"Date Assigned: \t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
+                disp_str += f"Due Date: \t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
+                disp_str += f"Completed: \t {t['completed']}\n"
+                disp_str += f"\nTask Description: \n{t['description']}"
+                disp_str += f""
+                print(disp_str)
+                indices.append(i)
+                display_count += 1
+            i += 1
+        print("-" * 75)
+
+        # Prompts user for task selection based on output
         try:
-            # Minuses by one to match selection to list indices
-            selection = int(input("Please select a task: ")) - 1
+            selection = int(input("Please select a task (type -1 to exit): "))
+            if selection == -1:
+                break
+            
+            # Minus by one to match selection with index
+            selection -= 1
+
+            # Checks if selection is in range of number of user tasks
             if selection not in range(len(indices)):
                 print("Task out of range\n")
                 continue
-            else:
-                break
         except ValueError:
             print("Please enter a whole number\n")
+            continue
 
-    # Prompts user to select action for selected task
-    while True:
+        # Prompts user to select action for selected task
         task_menu = input(f"""\nSelect one of the following options below for task {selection + 1}:
 c - Mark task as complete / incomplete
 ed - Edit task due date
 ea - Edit task assignee
 e - exit
 :""").lower()
-        
+            
         # Changes task completion status to opposite in task_list
         if task_menu == "c":
             if task_list[indices[selection]]['completed'] == False:
@@ -233,8 +251,10 @@ e - exit
             try:
                 task_list[indices[selection]]['due_date'] = datetime.strptime(due_date, DATETIME_STRING_FORMAT)
                 print(f"Task {selection + 1} due date changed")
+            
             except ValueError:
                 print("Invalid datetime format. Please use the format specified")
+                continue
 
 
         # Changes user assigned to task
@@ -243,6 +263,7 @@ e - exit
             # Prevents editing if task already complete
             if task_list[indices[selection]]['completed'] == True:
                 print("Completed tasks cannot be edited")
+                continue
 
             task_username = input(f"\nPlease enter the username of the person you would like to assign task {selection + 1} to: ")
 
@@ -253,14 +274,15 @@ e - exit
             else:
                 task_list[indices[selection]]['username'] = task_username
                 print(f"Task {selection + 1} assigned to {task_username}")
-        
+            
         # Exits task editor
         elif task_menu == "e":
             print("Exiting task editor")
-            break
+            continue
 
         else:
             print("Please select a listed option")
+            continue
         
 
         # Writes all modifications to tasks_lists to text file
