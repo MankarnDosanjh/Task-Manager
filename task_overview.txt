@@ -1,0 +1,4 @@
+Total task count: 	10
+Completed tasks: 	2 (20%)
+Incomplete tasks: 	8 (80%)
+Overdue tasks: 		0 (0%)
