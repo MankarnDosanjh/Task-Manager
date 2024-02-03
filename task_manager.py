@@ -402,7 +402,6 @@ a  - add task
 va - view all tasks
 vm - view my tasks
 gr - generate reports
-ds - display statistics
 e  - exit
 : ''').lower()
 
@@ -420,16 +419,6 @@ e  - exit
 
     elif menu == "gr":
         generate_report()
-    
-    # Admin menu displaying number of users and tasks
-    elif menu == 'ds' and curr_user == 'admin': 
-        num_users = len(username_password.keys())
-        num_tasks = len(task_list)
-
-        print("-----------------------------------")
-        print(f"Number of users: \t\t {num_users}")
-        print(f"Number of tasks: \t\t {num_tasks}")
-        print("-----------------------------------")    
 
     elif menu == 'e':
         print('Goodbye')
