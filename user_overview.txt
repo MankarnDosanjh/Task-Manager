@@ -1,9 +1,0 @@
-Total number of registered users: 1
-Total number of tasks: 1
-
-admin's Task Overview:
---------------------------------------------------
-Total task count: 	1 (100%)
-Completed tasks: 	0 (0%)
-Incomplete tasks: 	1 (100%)
-Overdue tasks: 		1 (100%)
