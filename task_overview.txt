@@ -1,4 +1,0 @@
-Total task count: 	1
-Completed tasks: 	0 (0%)
-Incomplete tasks: 	1 (100%)
-Overdue tasks: 		1 (100%)

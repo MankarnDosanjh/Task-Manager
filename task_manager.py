@@ -66,7 +66,7 @@ def reg_user():
                 for k in username_password:
                     user_data.append(f"{k};{username_password[k]}")
                 out_file.write("\n".join(user_data))
-            print("New user added")
+            print(f"{new_username} registered as user")
             break
 
         else:
@@ -83,24 +83,24 @@ def add_task():
     
     # Prompts for user assigned to task and checks user exists
     while True:
-        task_username = input("\nName of person assigned to task: ")
+        task_username = input("\nUser assigned to task: ")
         if task_username not in username_password.keys():
             print("ERROR - User does not exist")
         else:
             break
     
-    task_title = input("Title of Task: ")
-    task_description = input("Description of Task: ")
+    task_title = input("Task title: ")
+    task_description = input("Task description:")
 
     # Prompts for task due date and checks format is appropriate
     while True:
         try:
-            task_due_date = input("Due date of task (YYYY-MM-DD): ")
+            task_due_date = input("Task due date (YYYY-MM-DD): ")
             due_date_time = datetime.strptime(task_due_date, DATETIME_STRING_FORMAT)
             break
 
         except ValueError:
-            print("ERROR - Invalid datetime format")
+            print("ERROR - Invalid datetime format\n")
 
     curr_date = date.today()
 
@@ -129,13 +129,14 @@ def add_task():
             ]
             task_list_to_write.append(";".join(str_attrs))
         task_file.write("\n".join(task_list_to_write))
-    print("Task successfully added")
+    print("Task added")
 
 
 def view_all():
     '''Reads tasks from tasks.txt file and presents them to user'''
 
     # Fake loading bar helps user distinguish old from new output
+    print("\nLOADING")
     for s in range(50):
         print(".", end = "")
         time.sleep(random.random() / 10)
@@ -200,7 +201,7 @@ def view_mine():
 
         # Prompts user for task selection
         try:
-            selection = int(input("Please select a task (type -1 to exit task viewer): "))
+            selection = int(input("Select a task (-1 to exit): "))
             if selection == -1:
                 break
             
@@ -238,13 +239,13 @@ d - Edit task due date
 
             # Prevents editing if task already complete
             if task_list[indices[selection]]['completed'] == True:
-                print("Completed tasks cannot be edited")
+                print("ERROR - Completed tasks cannot be edited")
                 continue
 
             # Prompts for user to reassign task to, checking for non-existent usernames
             task_username = input(f"\nUser to reassign task {selection + 1} to: ")
             if task_username not in username_password.keys():
-                print("User does not exist")
+                print("ERROR - User does not exist")
             else:
                 task_list[indices[selection]]['username'] = task_username
                 print(f"Task {selection + 1} reassigned to {task_username}")
@@ -358,6 +359,8 @@ def generate_report():
             disp_str += "\n"
 
             fhandle.write(disp_str)
+    
+    print("Reports generated to task_overview.txt & user_overview.txt")
 
 #====Login Section====
 '''This code reads usernames and password from the user.txt file to 
@@ -396,7 +399,7 @@ while not logged_in:
 # Displays options to user and executes selected option
 while True:
     print()
-    menu = input('''Select one of the following options below:
+    menu = input(f'''Welcome {curr_user} please select one of the following options below:
 r  - register user
 a  - add task
 va - view all tasks
