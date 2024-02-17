@@ -187,7 +187,7 @@ def view_mine():
                 disp_str += f"\nAssigned to: \t {t['username']}\n"
                 disp_str += f"Date Assigned: \t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
                 disp_str += f"Due Date: \t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-                disp_str += f"Completed: \t {"Yes" if t['completed'] == True else "No"}\n"
+                disp_str += f"Completed: \t {'Yes' if t['completed'] == True else 'No'}\n"
                 disp_str += f"\nTask Description: \n{t['description']}"
                 disp_str += f""
                 print(disp_str)
