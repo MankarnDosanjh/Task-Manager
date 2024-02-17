@@ -422,6 +422,7 @@ e  - exit
 
     elif menu == "gr":
         generate_report()
+        time.sleep(3)
 
     elif menu == 'e':
         print('Goodbye')
