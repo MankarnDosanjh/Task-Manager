@@ -20,7 +20,7 @@ if not os.path.exists("tasks.txt"):
         pass
 
 # Creates list including all tasks from tasks.txt
-with open("tasks.txt", 'r') as task_file:
+with open("tasks.txt", "r") as task_file:
     task_data = task_file.read().split("\n")
     task_data = [t for t in task_data if t != ""]
 
@@ -90,7 +90,7 @@ def add_task():
             break
     
     task_title = input("Task title: ")
-    task_description = input("Task description:")
+    task_description = input("Task description: ")
 
     # Prompts for task due date and checks format is appropriate
     while True:
@@ -149,7 +149,7 @@ def view_all():
         disp_str += f"\nAssigned to: \t {t['username']}\n"
         disp_str += f"Date Assigned: \t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
         disp_str += f"Due Date: \t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-        disp_str += f"Completed: \t {"Yes" if t['completed'] == True else "No"}\n"
+        disp_str += f"Completed: \t {'Yes' if t['completed'] == True else 'No'}\n"
         disp_str += f"\nTask Description: \n{t['description']}"
         disp_str += f""
         print(disp_str)
@@ -408,24 +408,24 @@ gr - generate reports
 e  - exit
 : ''').lower()
 
-    if menu == 'r':
+    if menu == "r":
         reg_user()
 
-    elif menu == 'a':
+    elif menu == "a":
         add_task()
 
-    elif menu == 'va':
+    elif menu == "va":
         view_all()        
 
-    elif menu == 'vm':
+    elif menu == "vm":
         view_mine()
 
     elif menu == "gr":
         generate_report()
         time.sleep(3)
 
-    elif menu == 'e':
-        print('Goodbye')
+    elif menu == "e":
+        print("Goodbye")
         exit()
 
     else:
