@@ -404,6 +404,7 @@ r  - register user
 a  - add task
 va - view all tasks
 vm - view my tasks
+ds - display statistics
 gr - generate reports
 e  - exit
 : ''').lower()
@@ -420,10 +421,22 @@ e  - exit
     elif menu == "vm":
         view_mine()
 
+    elif menu == "ds" and curr_user == "admin": 
+        '''If the user is an admin they can display 
+        statistics about number of users and tasks.'''
+        
+        num_users = len(username_password.keys())
+        num_tasks = len(task_list)
+
+        print("-----------------------------------")
+        print(f"Number of users: \t\t {num_users}")
+        print(f"Number of tasks: \t\t {num_tasks}")
+        print("-----------------------------------") 
+    
     elif menu == "gr":
         generate_report()
         time.sleep(3)
-
+    
     elif menu == "e":
         print("Goodbye")
         exit()
